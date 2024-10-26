@@ -430,11 +430,18 @@
     "text": "Multiple Point Source Example\nTake three sources of SO2 (air quality standard 150 \\(\\mu\\text{g/m}^3\\)):\n\n\n\n\n\n\n\n\n\nSource\nEmissions (kg/day)\nEffective Height (m)\nRemoval Cost ($/kg)\n\n\n\n\n1\n34,560\n50\n0.20\n\n\n2\n172,800\n200\n0.45\n\n\n3\n103,680\n30\n0.60\n\n\n\nand five receptors at ground level with \\(u = 1.5\\) m/s."
   },
   {
+    "objectID": "slides/lecture10-2-managing-air-sources.html#aligning-units",
+    "href": "slides/lecture10-2-managing-air-sources.html#aligning-units",
+    "title": "Managing Multiple Air Pollutant Sources",
+    "section": "Aligning Units",
+    "text": "Aligning Units\n\n\n\nSource\nEmissions (g/s)\nEffective Height (m)\nRemoval Cost ($/g)\n\n\n\n\n1\n400\n50\n0.0002\n\n\n2\n2000\n200\n0.00045\n\n\n3\n1200\n30\n0.00060"
+  },
+  {
     "objectID": "slides/lecture10-2-managing-air-sources.html#multiple-point-source-example-1",
     "href": "slides/lecture10-2-managing-air-sources.html#multiple-point-source-example-1",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Multiple Point Source Example",
-    "text": "Multiple Point Source Example\n\n\nOur goal:\nMinimize cost of removing SO2 from the plume sources to ensure all receptors are not exposed beyond the 150 \\(\\mu\\text{g/m}^3\\) standard."
+    "text": "Multiple Point Source Example\n\n\nOur goal:\nMinimize cost of removing SO2 from the plume sources to ensure all receptors are not exposed beyond the 150 \\(\\mu\\text{g/m}^3\\) standard.\n\n\n\nCode\nsources = [(0, 7), (2, 5), (3, 5)]\nreceptors = [(1, 1.5), (3, 7), (5, 3), (7.5, 6), (10, 5)]\n\np = scatter(sources, label=\"Source\", markersize=6, color=:red, xlabel=L\"$x$ (km)\", ylabel=L\"$y$ (km)\", legend=:bottomright, ylims=(0, 8), xlims=(-0.5, 10.5))\nscatter!(receptors, label=\"Receptor\", markersize=6, color=:black)\nfor i in 1:length(sources)\n    annotate!(sources[i][1], sources[i][2] + 0.3, text(string(i), :red, 14, :center))\n    annotate!(sources[i][1], sources[i][2] - 0.3, text(string(sources[i]), :red, 14, :center))    \nend\nfor i in 1:length(receptors)\n    annotate!(receptors[i][1], receptors[i][2] + 0.3, text(string(i), :black, 14, :center))\n    annotate!(receptors[i][1], receptors[i][2] - 0.3, text(string(receptors[i]), :black, 14, :center))    \nend\nplot!(size=(700, 550))\nplot!([(0, 7.75), (10, 7.75)], arrow=true, color=:blue, linewidth=2, label=\"\")\nannotate!(4.5, 8, text(\"Wind\", :left, 18, :blue))\n\n\n\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Results of Generating Capacity Expansion Example"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#modeling-considerations",
@@ -490,7 +497,7 @@
     "href": "slides/lecture10-2-managing-air-sources.html#calculating-transmission-factors",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Calculating Transmission Factors",
-    "text": "Calculating Transmission Factors\n\n# delta_x, delta_y should be in m\nfunction transmission_factor(Δx, Δy, u, H)\n    if Δx &lt;= 0 # check if source is upwind of receptor\n        tf = 0.0 # ensure this is a Float\n    else\n        σy = 104 * (Δx / 1000)^0.894\n        σz = 61 * (Δx / 1000)^0.911\n        tf_coef = 1/(2 * pi * u * σy * σz)\n        tf = tf_coef * exp((-0.5 * (Δy / σy)^2) + (H / σz)^2)\n    end\n    return tf\nend"
+    "text": "Calculating Transmission Factors\n\n# Δx, Δy should be in m\nfunction transmission_factor(Δx, Δy, u, H)\n    if Δx &lt;= 0 # check if source is upwind of receptor\n        tf = 0.0 # ensure this is a Float\n    else\n        σy = 104 * (Δx / 1000)^0.894\n        σz = 61 * (Δx / 1000)^0.911\n        tf_coef = 1/(2 * pi * u * σy * σz)\n        tf = tf_coef * exp((-0.5 * (Δy / σy)^2) + (H / σz)^2)\n    end\n    return tf\nend"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#calculating-transmission-factors-1",
@@ -504,7 +511,7 @@
     "href": "slides/lecture10-2-managing-air-sources.html#objective",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Objective",
-    "text": "Objective\nWhat is our objective?\n\nMinimize cost:\n\\[\n\\begin{align}\n\\min_{R_i} & \\sum_i RemCost_i \\times (E_i \\times R_i) \\\\[0.5em]\n&= (0.20) (34560) R_1 + (0.45)(172800) R_2 + (0.60)(103680) R_3 \\\\[0.5em]\n&= 6912R_1 + 77760R_2 + 62208R_3\n\\end{align}\n\\]"
+    "text": "Objective\nWhat is our objective?\n\nMinimize cost:\n\\[\n\\begin{align}\n\\min_{R_i} & \\sum_i RemCost_i \\times (E_i \\times R_i) \\\\[0.5em]\n&= (0.0002) (400) R_1 + (0.00045)(2000) R_2 + (0.0006)(1200) R_3 \\\\[0.5em]\n&= 0.08R_1 + 0.9R_2 + 0.72R_3\n\\end{align}\n\\]"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#final-problem",
@@ -518,7 +525,7 @@
     "href": "slides/lecture10-2-managing-air-sources.html#solution",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Solution",
-    "text": "Solution\n\n\n\n\n\nSource\nSO2 Emissions (g/m^3)\nRemoval Percentage (%)\n\n\n\n\n1\n400\n85.0\n\n\n2\n2000\n100.0\n\n\n3\n1200\n75.0\n\n\n\n\n\nDoes this make sense?"
+    "text": "Solution\n\n\n\n\n\nSource\nSO2 Emissions (kg/s)\nRemoval Percentage (%)\n\n\n\n\n1\n400\n85.0\n\n\n2\n2000\n100.0\n\n\n3\n1200\n75.0\n\n\n\n\n\nDoes this make sense?"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#untreated-exposure",
@@ -553,7 +560,7 @@
     "href": "slides/lecture10-2-managing-air-sources.html#next-classes",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Next Classes",
-    "text": "Next Classes\nMonday: Fixed Costs and Mixed Integer Programs\nWednesday: Applications (network models, unit commitment)"
+    "text": "Next Classes\nMonday: Fixed Costs and Mixed Integer Programs\nWednesday and Next Week: Applications (network models, unit commitment)"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#assessments",
@@ -3795,49 +3802,35 @@
     "href": "slides/lecture10-1-gaussian-plumes.html#point-sourcesreceptors",
     "title": "Plume Dispersion Models",
     "section": "Point Sources/Receptors",
-    "text": "Point Sources/Receptors\nConcerned about dispersal from a point source:\n\n\n\nPoint Source/Receptor Schematic"
+    "text": "Point Sources/Receptors\n\n\n\nPoint Source/Receptor Schematic"
   },
   {
-    "objectID": "slides/lecture10-1-gaussian-plumes.html#point-sourcesreceptors-1",
-    "href": "slides/lecture10-1-gaussian-plumes.html#point-sourcesreceptors-1",
+    "objectID": "slides/lecture10-1-gaussian-plumes.html#emissions-follow-instantaneous-paths",
+    "href": "slides/lecture10-1-gaussian-plumes.html#emissions-follow-instantaneous-paths",
     "title": "Plume Dispersion Models",
-    "section": "Point Sources/Receptors",
-    "text": "Point Sources/Receptors\nAt a given instant, flow from source to receptor follows a path:\n\n\n\nPoint Source Flow Traces"
+    "section": "Emissions Follow Instantaneous Paths",
+    "text": "Emissions Follow Instantaneous Paths\n\n\n\nPoint Source Flow Traces"
   },
   {
-    "objectID": "slides/lecture10-1-gaussian-plumes.html#point-sourcesreceptors-2",
-    "href": "slides/lecture10-1-gaussian-plumes.html#point-sourcesreceptors-2",
+    "objectID": "slides/lecture10-1-gaussian-plumes.html#plume-time-averaged-positions",
+    "href": "slides/lecture10-1-gaussian-plumes.html#plume-time-averaged-positions",
     "title": "Plume Dispersion Models",
-    "section": "Point Sources/Receptors",
-    "text": "Point Sources/Receptors\nAveraging those traces over time gives us a “plume”:\n\n\n\nPoint Source Average Plume"
-  },
-  {
-    "objectID": "slides/lecture10-1-gaussian-plumes.html#point-sourcesreceptors-3",
-    "href": "slides/lecture10-1-gaussian-plumes.html#point-sourcesreceptors-3",
-    "title": "Plume Dispersion Models",
-    "section": "Point Sources/Receptors",
-    "text": "Point Sources/Receptors\nWhat is the distribution of pollutant above the receptor?\n\n\n\nPoint Source Average Plume"
+    "section": "Plume: Time-Averaged Positions",
+    "text": "Plume: Time-Averaged Positions\n\n\n\nPoint Source Average Plume"
   },
   {
     "objectID": "slides/lecture10-1-gaussian-plumes.html#gaussian-plume",
     "href": "slides/lecture10-1-gaussian-plumes.html#gaussian-plume",
     "title": "Plume Dispersion Models",
     "section": "“Gaussian Plume”",
-    "text": "“Gaussian Plume”\nWe can reason that the concentration follows a “bell curve”:\n\n\n\nGaussian Plume"
+    "text": "“Gaussian Plume”\n\n\n\nGaussian Plume"
   },
   {
     "objectID": "slides/lecture10-1-gaussian-plumes.html#gaussian-plume-1",
     "href": "slides/lecture10-1-gaussian-plumes.html#gaussian-plume-1",
     "title": "Plume Dispersion Models",
     "section": "“Gaussian Plume”",
-    "text": "“Gaussian Plume”\nWe can reason that the concentration follows a “bell curve”:\n\n\n\nGaussian Plume Distribution"
-  },
-  {
-    "objectID": "slides/lecture10-1-gaussian-plumes.html#gaussian-plume-2",
-    "href": "slides/lecture10-1-gaussian-plumes.html#gaussian-plume-2",
-    "title": "Plume Dispersion Models",
-    "section": "“Gaussian Plume”",
-    "text": "“Gaussian Plume”\nNot illustrated, but this reasoning also applies cross-wind (\\(y\\)).\n\n\n\nGaussian Plume Distribution"
+    "text": "“Gaussian Plume”\n\n\n\nGaussian Plume Distribution"
   },
   {
     "objectID": "slides/lecture10-1-gaussian-plumes.html#gaussian-plume-model",
@@ -3851,7 +3844,7 @@
     "href": "slides/lecture10-1-gaussian-plumes.html#gaussian-plume-derivation",
     "title": "Plume Dispersion Models",
     "section": "Gaussian Plume Derivation",
-    "text": "Gaussian Plume Derivation\nUse the advective-diffusion equation to describe the mass-balance of a small air parcel :\n\\[ \\frac{\\partial C}{\\partial t} + \\color{blue}\\overbrace{[D + K] \\nabla^2 C}^\\text{diffusion} \\color{black} - \\color{red}\\overbrace{\\overrightarrow{u} \\cdot \\overrightarrow{\\nabla} C}^\\text{advection}\\]\n\n\\(D\\) is the diffusion coefficient\n\\(K\\) is the dispersion coefficient (turbulent mixing)"
+    "text": "Gaussian Plume Derivation\nUse the advective-diffusion equation to describe the mass-balance of a small air parcel :\n$$ + ^ - ^$ = 0$\n\n\\(D\\) is the diffusion coefficient\n\\(K\\) is the dispersion coefficient (turbulent mixing)"
   },
   {
     "objectID": "slides/lecture10-1-gaussian-plumes.html#diffusive-flux",
@@ -3914,7 +3907,7 @@
     "href": "slides/lecture10-1-gaussian-plumes.html#gaussian-plume-model-with-reflection",
     "title": "Plume Dispersion Models",
     "section": "Gaussian Plume Model with Reflection",
-    "text": "Gaussian Plume Model with Reflection\nLast piece: the ground dampens vertical dispersion.\n\n\n\nReflected Mass Off Ground"
+    "text": "Gaussian Plume Model with Reflection\n\n\n\nReflected Mass Off Ground"
   },
   {
     "objectID": "slides/lecture10-1-gaussian-plumes.html#gaussian-plume-model-with-reflection-1",
@@ -3978,6 +3971,20 @@
     "title": "Plume Dispersion Models",
     "section": "Estimating Dispersion “Spread”",
     "text": "Estimating Dispersion “Spread”\nThen take estimates for \\(\\sigma_y\\) and \\(\\sigma_z\\) and plug into plume dispersion equation\n\\[\\begin{aligned}\nC(x,y,z) = &\\frac{Q}{2\\pi u {\\color{red}\\sigma_y \\sigma_z}} \\exp\\left(\\frac{-y^2}{2{\\color{red}\\sigma_y^2}} \\right) \\times \\\\\\\\\n& \\quad \\left[\\exp\\left(\\frac{-(z-H)^2}{2{\\color{red}\\sigma_z^2}}\\right) + \\exp\\left(\\frac{-(z+H)^2}{2{\\color{red}\\sigma_z^2}}\\right) \\right]\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "slides/lecture10-1-gaussian-plumes.html#example",
+    "href": "slides/lecture10-1-gaussian-plumes.html#example",
+    "title": "Plume Dispersion Models",
+    "section": "Example",
+    "text": "Example\nThe emission rate of SO2 from a smokestack is 100 g/s. At 3km downwind on a clear fall evening (class F), what is the centerline ground-level concentration of SO2? The effective plume height is 41m and the wind speed at this height is 2.5 m/s. Under these conditions,\n\\[\n\\sigma_y = 34x^{0.894}\n\\]\n\\[\n\\sigma_z = \\begin{cases}14.35x^{0.740} - 0.35 & x &lt; 1 \\text{km} \\\\ 62.6x^{0.180} - 48.6 & x &gt; 1 \\text{km} \\end{cases}\n\\]"
+  },
+  {
+    "objectID": "slides/lecture10-1-gaussian-plumes.html#worked-example",
+    "href": "slides/lecture10-1-gaussian-plumes.html#worked-example",
+    "title": "Plume Dispersion Models",
+    "section": "Worked Example",
+    "text": "Worked Example\n\nCenterline, ground level concentration: \\(y, z=0\\)\n3km downwind:\n\n\\(\\sigma_y \\approx 91 \\text{m}\\)\n\\(\\sigma_z \\approx 28 \\text{m}\\)"
   },
   {
     "objectID": "slides/lecture10-1-gaussian-plumes.html#key-takeaways-1",

@@ -363,6 +363,7 @@
 <li><a href="#/review-and-questions" id="/toc-review-and-questions">Review and Questions</a></li>
 <li><a href="#/plume-dispersion" id="/toc-plume-dispersion">Plume Dispersion</a></li>
 <li><a href="#/dispersion-and-atmospheric-stability" id="/toc-dispersion-and-atmospheric-stability">Dispersion and Atmospheric Stability</a></li>
+<li><a href="#/gaussian-plume-example" id="/toc-gaussian-plume-example">Gaussian Plume Example</a></li>
 <li><a href="#/key-takeaways" id="/toc-key-takeaways">Key Takeaways</a></li>
 <li><a href="#/upcoming-schedule" id="/toc-upcoming-schedule">Upcoming Schedule</a></li>
 </ul>
@@ -417,7 +418,7 @@
 <h2>Impact of the Clean Air Act</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="https://media.rff.org/images/clean_air_PR.width-1480.png"></p>
+<p><img data-src="https://media.rff.org/images/clean_air_PR.width-1480.png" style="width:55.0%"></p>
 <figcaption>Decoupling of GDP and Air Pollution</figcaption>
 </figure>
 </div>
@@ -436,70 +437,45 @@
 </section>
 <section id="point-sourcesreceptors" class="slide level2">
 <h2>Point Sources/Receptors</h2>
-<p>Concerned about dispersal from a point source:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/air-pollution.png"></p>
+<p><img data-src="figures/air-pollution.png" style="width:75.0%"></p>
 <figcaption>Point Source/Receptor Schematic</figcaption>
 </figure>
 </div>
 </section>
-<section id="point-sourcesreceptors-1" class="slide level2">
-<h2>Point Sources/Receptors</h2>
-<p>At a given instant, flow from source to receptor follows a path:</p>
+<section id="emissions-follow-instantaneous-paths" class="slide level2">
+<h2>Emissions Follow Instantaneous Paths</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/air-pollution-instant.png"></p>
+<p><img data-src="figures/air-pollution-instant.png" style="width:75.0%"></p>
 <figcaption>Point Source Flow Traces</figcaption>
 </figure>
 </div>
 </section>
-<section id="point-sourcesreceptors-2" class="slide level2">
-<h2>Point Sources/Receptors</h2>
-<p>Averaging those traces over time gives us a “plume”:</p>
+<section id="plume-time-averaged-positions" class="slide level2">
+<h2>Plume: Time-Averaged Positions</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/air-pollution-plume-timeavg.png"></p>
-<figcaption>Point Source Average Plume</figcaption>
-</figure>
-</div>
-</section>
-<section id="point-sourcesreceptors-3" class="slide level2">
-<h2>Point Sources/Receptors</h2>
-<p>What is the distribution of pollutant above the receptor?</p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figures/air-pollution-plume-timeavg.png"></p>
+<p><img data-src="figures/air-pollution-plume-timeavg.png" style="width:75.0%"></p>
 <figcaption>Point Source Average Plume</figcaption>
 </figure>
 </div>
 </section>
 <section id="gaussian-plume" class="slide level2">
 <h2>“Gaussian Plume”</h2>
-<p>We can reason that the concentration follows a “bell curve”:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/air-pollution-plume-shape.png"></p>
+<p><img data-src="figures/air-pollution-plume-shape.png" style="width:75.0%"></p>
 <figcaption>Gaussian Plume</figcaption>
 </figure>
 </div>
 </section>
 <section id="gaussian-plume-1" class="slide level2">
 <h2>“Gaussian Plume”</h2>
-<p>We can reason that the concentration follows a “bell curve”:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/air-pollution-plume-dist.png"></p>
-<figcaption>Gaussian Plume Distribution</figcaption>
-</figure>
-</div>
-</section>
-<section id="gaussian-plume-2" class="slide level2">
-<h2>“Gaussian Plume”</h2>
-<p>Not illustrated, but this reasoning also applies cross-wind (<span class="math inline">\(y\)</span>).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figures/air-pollution-plume-dist.png"></p>
+<p><img data-src="figures/air-pollution-plume-dist.png" style="width:75.0%"></p>
 <figcaption>Gaussian Plume Distribution</figcaption>
 </figure>
 </div>
@@ -539,7 +515,7 @@ C(x,y,z) = \frac{Q}{2\pi u \sigma_y \sigma_z} \exp\left[-\frac{1}{2} \left(\frac
 <section id="gaussian-plume-derivation" class="slide level2">
 <h2>Gaussian Plume Derivation</h2>
 <p>Use the <strong>advective-diffusion equation</strong> to describe the mass-balance of a small air parcel :</p>
-<p><span class="math display">\[ \frac{\partial C}{\partial t} + \color{blue}\overbrace{[D + K] \nabla^2 C}^\text{diffusion} \color{black} - \color{red}\overbrace{\overrightarrow{u} \cdot \overrightarrow{\nabla} C}^\text{advection}\]</span></p>
+<p>$$ + ^ - ^$ = 0$</p>
 <ul>
 <li><span class="math inline">\(D\)</span> is the diffusion coefficient</li>
 <li><span class="math inline">\(K\)</span> is the dispersion coefficient (turbulent mixing)</li>
@@ -644,10 +620,9 @@ C(x,y,z) = \frac{Q}{2\pi u \sigma_y \sigma_z} \exp\left[-\frac{1}{2}\left(\frac{
 </section>
 <section id="gaussian-plume-model-with-reflection" class="slide level2">
 <h2>Gaussian Plume Model with Reflection</h2>
-<p>Last piece: the ground dampens vertical dispersion.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="figures/reflection.png"></p>
+<p><img data-src="figures/reflection.png" style="width:65.0%"></p>
 <figcaption>Reflected Mass Off Ground</figcaption>
 </figure>
 </div>
@@ -783,6 +758,32 @@ C(x,y,z) = &amp;\frac{Q}{2\pi u \sigma_y \sigma_z} \exp\left(\frac{-y^2}{2\sigma
 C(x,y,z) = &amp;\frac{Q}{2\pi u {\color{red}\sigma_y \sigma_z}} \exp\left(\frac{-y^2}{2{\color{red}\sigma_y^2}} \right) \times \\\\
 &amp; \quad \left[\exp\left(\frac{-(z-H)^2}{2{\color{red}\sigma_z^2}}\right) + \exp\left(\frac{-(z+H)^2}{2{\color{red}\sigma_z^2}}\right) \right]
 \end{aligned}\]</span></p>
+</section></section>
+<section>
+<section id="gaussian-plume-example" class="title-slide slide level1 center">
+<h1>Gaussian Plume Example</h1>
+
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<p>The emission rate of SO<sub>2</sub> from a smokestack is 100 g/s. At <strong>3km downwind</strong> on a clear fall evening (class F), <strong>what is the centerline ground-level concentration of SO<sub>2</sub></strong>? The effective plume height is 41m and the wind speed at this height is 2.5 m/s. Under these conditions,</p>
+<p><span class="math display">\[
+\sigma_y = 34x^{0.894}
+\]</span></p>
+<p><span class="math display">\[
+\sigma_z = \begin{cases}14.35x^{0.740} - 0.35 &amp; x &lt; 1 \text{km} \\ 62.6x^{0.180} - 48.6 &amp; x &gt; 1 \text{km} \end{cases}
+\]</span></p>
+</section>
+<section id="worked-example" class="slide level2">
+<h2>Worked Example</h2>
+<ul>
+<li><strong>Centerline, ground level concentration</strong>: <span class="math inline">\(y, z=0\)</span></li>
+<li><strong>3km downwind</strong>:
+<ul>
+<li><span class="math inline">\(\sigma_y \approx 91 \text{m}\)</span></li>
+<li><span class="math inline">\(\sigma_z \approx 28 \text{m}\)</span></li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="key-takeaways" class="title-slide slide level1 center">
