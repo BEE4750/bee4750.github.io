@@ -469,7 +469,7 @@
     "href": "slides/lecture10-2-managing-air-sources.html#developing-constraints",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Developing Constraints",
-    "text": "Developing Constraints\nHow do we relate the exposure level to \\(Q_i\\)?\n\nWrite \\(C_i(x,y) = Q_it_i(x,y)\\), where the \\(t_i\\) is the transmission factor from the Gaussian dispersion model:\n\\[t_i(x,y) = \\frac{1}{\\pi u \\sigma_y \\sigma_z} \\exp\\left(\\frac{-y^2}{2\\sigma_y^2}\\right)\\exp\\left(\\frac{H^2}{\\sigma_z^2}\\right)\\]"
+    "text": "Developing Constraints\nHow do we relate the exposure level to \\(Q_i\\)?\n\nWrite \\(C_i(x,y) = Q_it_i(x,y)\\), where the \\(t_i\\) is the transmission factor from the Gaussian dispersion model:\n\\[t_i(x,y) = \\frac{1}{2\\pi u \\sigma_y \\sigma_z} \\exp\\left(\\frac{-y^2}{2\\sigma_y^2} + \\frac{H^2}{\\sigma_z^2}\\right)\\]"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#developing-constraints-1",
@@ -497,14 +497,14 @@
     "href": "slides/lecture10-2-managing-air-sources.html#calculating-transmission-factors",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Calculating Transmission Factors",
-    "text": "Calculating Transmission Factors\n\n# Δx, Δy should be in m\nfunction transmission_factor(Δx, Δy, u, H)\n    if Δx &lt;= 0 # check if source is upwind of receptor\n        tf = 0.0 # ensure this is a Float\n    else\n        σy = 104 * (Δx / 1000)^0.894\n        σz = 61 * (Δx / 1000)^0.911\n        tf_coef = 1/(pi * u * σy * σz)\n        tf = tf_coef * exp(-0.5 * (Δy / σy)^2) + exp(-0.5 * (H / σz)^2)\n    end\n    return tf\nend"
+    "text": "Calculating Transmission Factors\n\n# Δx, Δy should be in m\nfunction transmission_factor(Δx, Δy, u, H)\n    if Δx &lt;= 0 # check if source is upwind of receptor\n        tf = 0.0 # ensure this is a Float\n    else\n        σy = 104 * (Δx / 1000)^0.894\n        σz = 61 * (Δx / 1000)^0.911\n        tf_coef = 1/(2 * pi * u * σy * σz)\n        tf = tf_coef * exp((-0.5 * (Δy / σy)^2) + (H / σz)^2)\n    end\n    return tf\nend"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#calculating-transmission-factors-1",
     "href": "slides/lecture10-2-managing-air-sources.html#calculating-transmission-factors-1",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Calculating Transmission Factors",
-    "text": "Calculating Transmission Factors\nFor example, from Source 1 to Receptor 1:\n\ntransmission_factor(1000, 5500, 1.5, 50)\n\n0.7146722726551791\n\n\nOr from Source 1 to Receptor 2:\n\ntransmission_factor(3000, 0, 1.5, 50)\n\n0.955631793567744"
+    "text": "Calculating Transmission Factors\nFor example, from Source 1 to Receptor 1:\n\ntransmission_factor(1000, 5500, 1.5, 50)\n\n0.0\n\n\nOr from Source 1 to Receptor 2:\n\ntransmission_factor(3000, 0, 1.5, 50)\n\n2.521069616495523e-6"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#objective",
@@ -525,14 +525,14 @@
     "href": "slides/lecture10-2-managing-air-sources.html#solution",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Solution",
-    "text": "Solution\n\n\n\n\n\nSource\nSO2 Emissions (kg/s)\nRemoval Percentage (%)\n\n\n\n\n1\n10000\n100.0\n\n\n2\n25000\n100.0\n\n\n3\n18000\n100.0\n\n\n\n\n\nDoes this make sense?"
+    "text": "Solution\n\n\n\n\n\nSource\nSO2 Emissions (kg/s)\nRemoval Percentage (%)\n\n\n\n\n1\n10000\n48.0\n\n\n2\n25000\n69.0\n\n\n3\n18000\n0.0\n\n\n\n\n\nDoes this make sense?"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#untreated-exposure",
     "href": "slides/lecture10-2-managing-air-sources.html#untreated-exposure",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Untreated Exposure",
-    "text": "Untreated Exposure\nIn the absence of our treatment plan (exposure in \\(\\text{mg/m}^3\\)):\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource\nR1\nR2\nR3\nR4\nR5\n\n\n\n\n1\n7.146723e6\n9.556318e6\n9.822644e6\n9.914882e6\n9.949516e6\n\n\n2\n0.0\n115785.0\n1.209361e7\n1.9652447e7\n2.213754e7\n\n\n3\n0.0\n0.0\n1.7394739e7\n1.786005e7\n1.7937313e7\n\n\n\n\n\nNeed to reduce Source 1’s emissions to bring Receptor 2’s exposure down. What about Sources 2 and 3?"
+    "text": "Untreated Exposure\nIn the absence of our treatment plan (exposure in \\(\\text{mg/m}^3\\)):\n\n\n\n\n\nSource\nR1\nR2\nR3\nR4\nR5\n\n\n\n\n1\n0.0\n25.0\n0.0\n1.0\n0.0\n\n\n2\n0.0\n0.0\n0.0\n3.0\n12.0\n\n\n3\n0.0\n0.0\n0.0\n1.0\n9.0\n\n\n\n\n\nNeed to reduce Source 1’s emissions to bring Receptor 2’s exposure down. What about Sources 2 and 3?"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#why-this-plan-makes-sense",
@@ -546,7 +546,7 @@
     "href": "slides/lecture10-2-managing-air-sources.html#treated-exposure",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Treated Exposure",
-    "text": "Treated Exposure\n\n\n\n\n\nSource\nR1\nR2\nR3\nR4\nR5\n\n\n\n\n1\n0.0\n0.0\n0.0\n0.0\n0.0\n\n\n2\n0.0\n0.0\n0.0\n0.0\n0.0\n\n\n3\n0.0\n0.0\n13.0\n13.0\n13.0"
+    "text": "Treated Exposure\n\n\n\n\n\nSource\nR1\nR2\nR3\nR4\nR5\n\n\n\n\n1\n0.0\n13.0\n0.0\n1.0\n0.0\n\n\n2\n0.0\n0.0\n0.0\n1.0\n4.0\n\n\n3\n0.0\n0.0\n0.0\n1.0\n9.0"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#key-takeaways-1",
