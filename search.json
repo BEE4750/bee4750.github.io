@@ -469,7 +469,7 @@
     "href": "slides/lecture10-2-managing-air-sources.html#developing-constraints",
     "title": "Managing Multiple Air Pollutant Sources",
     "section": "Developing Constraints",
-    "text": "Developing Constraints\nHow do we relate the exposure level to \\(Q_i\\)?\n\nWrite \\(C_i(x,y) = Q_it_i(x,y)\\), where the \\(t_i\\) is the transmission factor from the Gaussian dispersion model:\n\\[t_i(x,y) = \\frac{1}{2\\pi u \\sigma_y \\sigma_z} \\exp\\left(\\frac{-y^2}{2\\sigma_y^2} + \\frac{H^2}{\\sigma_z^2}\\right)\\]"
+    "text": "Developing Constraints\nHow do we relate the exposure level to \\(Q_i\\)?\n\nWrite \\(C_i(x,y) = Q_it_i(x,y)\\), where the \\(t_i\\) is the transmission factor from the Gaussian dispersion model:\n\\[t_i(x,y) = \\frac{1}{\\pi u \\sigma_y \\sigma_z} \\exp\\left(\\frac{-y^2}{2\\sigma_y^2}\\right)\\exp\\left(\\frac{H^2}{2 \\sigma_z^2}\\right)\\]"
   },
   {
     "objectID": "slides/lecture10-2-managing-air-sources.html#developing-constraints-1",
