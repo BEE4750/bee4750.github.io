@@ -1494,6 +1494,13 @@
     "text": "Questions\n\n\n\n\n\n\n\n\nText: VSRIKRISH to 22333\nURL: https://pollev.com/vsrikrish  See Results"
   },
   {
+    "objectID": "slides/lecture11-1-mixed-integer.html#limitations-of-linear-programming",
+    "href": "slides/lecture11-1-mixed-integer.html#limitations-of-linear-programming",
+    "title": "Discrete Variables and Mixed Integer Programming",
+    "section": "Limitations of Linear Programming",
+    "text": "Limitations of Linear Programming\nLPs are powerful but have some (strong) assumptions.\nWhat do we do when they don’t hold or a linear relaxation would be inappropriate?"
+  },
+  {
     "objectID": "slides/lecture11-1-mixed-integer.html#problems-with-discrete-decisions",
     "href": "slides/lecture11-1-mixed-integer.html#problems-with-discrete-decisions",
     "title": "Discrete Variables and Mixed Integer Programming",
