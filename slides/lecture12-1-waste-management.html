@@ -729,8 +729,8 @@
 <p><span class="math display">\[
 \begin{align}
 \min_{W_{i,j}, {Y_j}} &amp; \sum_i \sum_j a_{ij}\,l_{ij}\,W_{ij} + \sum_j \left[c_jY_j + \sum_i b_jW_{ij}\right] \\
-\text{subject to:} \quad &amp; Y_j = \begin{cases}0 &amp; \text{if } \sum_{i \in I} W_{ij} = 0 \\ 1 &amp; \text{if } \sum_{i \in I} W_{ij} &gt; 0 \end{cases}  \\
-&amp; \sum_i W_{ij} \leq K_j  \\
+\text{subject to:} \quad &amp; Y_j = \begin{cases}0 &amp; \text{if } \sum_{i \in I} W_{ij} + \sum_{k \noteq j} R_{kj} = 0 \\ 1 &amp; \text{if } \sum_{i \in I} W_{ij} + \sum_{k \noteq j} R_{kj} &gt; 0 \end{cases}  \\
+&amp; \sum_i W_{ij} + \sum_k R_{kj} \leq K_j  \\
 &amp; \sum_j W_{ij} = S_i  \\
 &amp;  W_{ij} \geq 0
 \end{align}
