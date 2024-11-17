@@ -457,8 +457,8 @@
 <section id="key-information-for-problem" class="slide level2">
 <h2>Key information For Problem</h2>
 <ul>
-<li>Planting costs are $150, $230, and $260 per acre for wheat, corn, and sugar beets, respectively.</li>
-<li>The farmer requires 200T of wheat and 240T kg of corn for feed, and excess can be sold for $170 and $150 per T, respectively.</li>
+<li>Planting costs are $150, $230, and $260 per ha for wheat, corn, and sugar beets, respectively.</li>
+<li>The farmer requires 200T of wheat and 240T of corn for feed, and excess can be sold for $170 and $150 per T, respectively.</li>
 <li>Purchasing crops costs $40 more than the selling prices.</li>
 <li>Sugar beets are sold at $36/T up to 6000T, at which point the price drops to $10 per T.</li>
 </ul>
@@ -467,10 +467,10 @@
 <h2>Farm Yields</h2>
 <p>From prior experience, the farmer knows that in an average year, yields are:</p>
 <ul>
-<li>2.5 T/acre for wheat;</li>
-<li>3 T/acre per corn;<br>
+<li>2.5 T/ha for wheat;</li>
+<li>3 T/ha per corn;<br>
 </li>
-<li>20T/acre for beets.</li>
+<li>20 T/ha for beets.</li>
 </ul>
 </section>
 <section id="decision-variables" class="slide level2">
@@ -487,7 +487,7 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(x_i\)</span></td>
-<td style="text-align: left;">acres of crop <span class="math inline">\(i\)</span> planted</td>
+<td style="text-align: left;">ha of crop <span class="math inline">\(i\)</span> planted</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(y_i\)</span></td>
@@ -499,7 +499,7 @@
 </tr>
 </tbody>
 </table>
-<p>One twist: sold beets will be represented by two different <span class="math inline">\(z\)</span>-variables (<span class="math inline">\(z_3\)</span> and <span class="math inline">\(z_4\)</span>), based on whether we exceed 6000T.</p>
+<p>One twist: sold beets will be represented by two different <span class="math inline">\(z\)</span>-variables (<span class="math inline">\(z_3\)</span> and <span class="math inline">\(z_4\)</span>), based on whether we exceed 6000 T.</p>
 </div>
 </section>
 <section id="deterministic-problem-formulation" class="slide level2">
@@ -530,7 +530,7 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Area (acres)</td>
+<td style="text-align: left;">Area (ha)</td>
 <td style="text-align: center;">120</td>
 <td style="text-align: center;">80</td>
 <td style="text-align: center;">300</td>
@@ -582,7 +582,7 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(x_i\)</span></td>
-<td style="text-align: left;">acres of crop <span class="math inline">\(i\)</span> planted</td>
+<td style="text-align: left;">ha of crop <span class="math inline">\(i\)</span> planted</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(y_{ij}\)</span></td>
@@ -665,13 +665,13 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Deterministic Area (acres)</td>
+<td style="text-align: left;">Deterministic Area (ha)</td>
 <td style="text-align: center;">120</td>
 <td style="text-align: center;">80</td>
 <td style="text-align: center;">300</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Stochastic Area (acres)</td>
+<td style="text-align: left;">Stochastic Area (ha)</td>
 <td style="text-align: center;">170</td>
 <td style="text-align: center;">80</td>
 <td style="text-align: center;">250</td>

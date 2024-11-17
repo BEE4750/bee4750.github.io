@@ -4824,21 +4824,21 @@
     "href": "slides/lecture13-1-stochastic-optimization.html#key-information-for-problem",
     "title": "Stochastic Optimization",
     "section": "Key information For Problem",
-    "text": "Key information For Problem\n\nPlanting costs are $150, $230, and $260 per acre for wheat, corn, and sugar beets, respectively.\nThe farmer requires 200T of wheat and 240T kg of corn for feed, and excess can be sold for $170 and $150 per T, respectively.\nPurchasing crops costs $40 more than the selling prices.\nSugar beets are sold at $36/T up to 6000T, at which point the price drops to $10 per T."
+    "text": "Key information For Problem\n\nPlanting costs are $150, $230, and $260 per ha for wheat, corn, and sugar beets, respectively.\nThe farmer requires 200T of wheat and 240T of corn for feed, and excess can be sold for $170 and $150 per T, respectively.\nPurchasing crops costs $40 more than the selling prices.\nSugar beets are sold at $36/T up to 6000T, at which point the price drops to $10 per T."
   },
   {
     "objectID": "slides/lecture13-1-stochastic-optimization.html#farm-yields",
     "href": "slides/lecture13-1-stochastic-optimization.html#farm-yields",
     "title": "Stochastic Optimization",
     "section": "Farm Yields",
-    "text": "Farm Yields\nFrom prior experience, the farmer knows that in an average year, yields are:\n\n2.5 T/acre for wheat;\n3 T/acre per corn;\n\n20T/acre for beets."
+    "text": "Farm Yields\nFrom prior experience, the farmer knows that in an average year, yields are:\n\n2.5 T/ha for wheat;\n3 T/ha per corn;\n\n20 T/ha for beets."
   },
   {
     "objectID": "slides/lecture13-1-stochastic-optimization.html#decision-variables",
     "href": "slides/lecture13-1-stochastic-optimization.html#decision-variables",
     "title": "Stochastic Optimization",
     "section": "Decision Variables",
-    "text": "Decision Variables\nWhat are the decision variables?\n\n\n\n\nVariable\nDefinition\n\n\n\n\n\\(x_i\\)\nacres of crop \\(i\\) planted\n\n\n\\(y_i\\)\nT of crop \\(i\\) purchased\n\n\n\\(z_i\\)\nT of crop \\(i\\) sold\n\n\n\nOne twist: sold beets will be represented by two different \\(z\\)-variables (\\(z_3\\) and \\(z_4\\)), based on whether we exceed 6000T."
+    "text": "Decision Variables\nWhat are the decision variables?\n\n\n\n\nVariable\nDefinition\n\n\n\n\n\\(x_i\\)\nha of crop \\(i\\) planted\n\n\n\\(y_i\\)\nT of crop \\(i\\) purchased\n\n\n\\(z_i\\)\nT of crop \\(i\\) sold\n\n\n\nOne twist: sold beets will be represented by two different \\(z\\)-variables (\\(z_3\\) and \\(z_4\\)), based on whether we exceed 6000 T."
   },
   {
     "objectID": "slides/lecture13-1-stochastic-optimization.html#deterministic-problem-formulation",
@@ -4852,7 +4852,7 @@
     "href": "slides/lecture13-1-stochastic-optimization.html#deterministic-solution",
     "title": "Stochastic Optimization",
     "section": "Deterministic Solution",
-    "text": "Deterministic Solution\n\n\n\nVariable\nWheat\nCorn\nBeets\n\n\n\n\nArea (acres)\n120\n80\n300\n\n\nYield (T)\n300\n240\n6000\n\n\nSales (T)\n100\n–\n6000\n\n\nPurchased (T)\n–\n–\n–\n\n\n\nThis solution yields a profit of $118,600."
+    "text": "Deterministic Solution\n\n\n\nVariable\nWheat\nCorn\nBeets\n\n\n\n\nArea (ha)\n120\n80\n300\n\n\nYield (T)\n300\n240\n6000\n\n\nSales (T)\n100\n–\n6000\n\n\nPurchased (T)\n–\n–\n–\n\n\n\nThis solution yields a profit of $118,600."
   },
   {
     "objectID": "slides/lecture13-1-stochastic-optimization.html#what-about-uncertainty",
@@ -4866,7 +4866,7 @@
     "href": "slides/lecture13-1-stochastic-optimization.html#stochastic-decision-variables",
     "title": "Stochastic Optimization",
     "section": "Stochastic Decision Variables",
-    "text": "Stochastic Decision Variables\nWhat should change about our decision variables?\n\n\n\n\nVariable\nDefinition\n\n\n\n\n\\(x_i\\)\nacres of crop \\(i\\) planted\n\n\n\\(y_{ij}\\)\nT of crop \\(i\\) purchased in scenario \\(j\\)\n\n\n\\(z_{ij}\\)\nT of crop \\(i\\) sold in scenario \\(j\\)"
+    "text": "Stochastic Decision Variables\nWhat should change about our decision variables?\n\n\n\n\nVariable\nDefinition\n\n\n\n\n\\(x_i\\)\nha of crop \\(i\\) planted\n\n\n\\(y_{ij}\\)\nT of crop \\(i\\) purchased in scenario \\(j\\)\n\n\n\\(z_{ij}\\)\nT of crop \\(i\\) sold in scenario \\(j\\)"
   },
   {
     "objectID": "slides/lecture13-1-stochastic-optimization.html#two-stage-problems",
@@ -4908,7 +4908,7 @@
     "href": "slides/lecture13-1-stochastic-optimization.html#stochastic-solution",
     "title": "Stochastic Optimization",
     "section": "Stochastic Solution",
-    "text": "Stochastic Solution\n\n\n\nVariable\nWheat\nCorn\nBeets\n\n\n\n\nDeterministic Area (acres)\n120\n80\n300\n\n\nStochastic Area (acres)\n170\n80\n250\n\n\n\nHow do we interpret the differences?"
+    "text": "Stochastic Solution\n\n\n\nVariable\nWheat\nCorn\nBeets\n\n\n\n\nDeterministic Area (ha)\n120\n80\n300\n\n\nStochastic Area (ha)\n170\n80\n250\n\n\n\nHow do we interpret the differences?"
   },
   {
     "objectID": "slides/lecture13-1-stochastic-optimization.html#comparing-deterministic-and-stochastic-solution",
