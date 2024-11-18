@@ -5004,6 +5004,13 @@
     "text": "Value of the Stochastic Solution\n\nSolutions to stochastic problems can produce a better expected outcome than the deterministic solution, but will perform better/worse in any given scenario.\nValue of the stochastic solution quantifies expected improvement in performance.\nExpected value of perfect information: amount you might be willing to pay for improved forecasts."
   },
   {
+    "objectID": "slides/lecture13-1-stochastic-optimization.html#no-class-after-thanksgiving",
+    "href": "slides/lecture13-1-stochastic-optimization.html#no-class-after-thanksgiving",
+    "title": "Stochastic Optimization",
+    "section": "No Class after Thanksgiving!",
+    "text": "No Class after Thanksgiving!\n\nWork on project!\nWill have open “office hours” during class time for project check-ins (remotely on 12/4)"
+  },
+  {
     "objectID": "slides/lecture13-1-stochastic-optimization.html#next-classes",
     "href": "slides/lecture13-1-stochastic-optimization.html#next-classes",
     "title": "Stochastic Optimization",
@@ -5011,18 +5018,11 @@
     "text": "Next Classes\nWednesday: Limits of Mathematical Programming\nMonday: Prelim 2 Review, Wrap-Up"
   },
   {
-    "objectID": "slides/lecture13-1-stochastic-optimization.html#no-class-after-thanksgiving",
-    "href": "slides/lecture13-1-stochastic-optimization.html#no-class-after-thanksgiving",
-    "title": "Stochastic Optimization",
-    "section": "No Class after Thanksgiving!",
-    "text": "No Class after Thanksgiving!\n\nWork on project!\nWill have open office hours for project check-ins (remotely on 12/4)"
-  },
-  {
     "objectID": "slides/lecture13-1-stochastic-optimization.html#assessments",
     "href": "slides/lecture13-1-stochastic-optimization.html#assessments",
     "title": "Stochastic Optimization",
     "section": "Assessments",
-    "text": "Assessments\nHW5: Will be due last week of class (12/5)."
+    "text": "Assessments\nHW5: Due 12/5."
   },
   {
     "objectID": "slides/lecture10-1-gaussian-plumes.html#prelim-1-statistics",
