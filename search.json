@@ -885,6 +885,13 @@
     "text": "Multiple Objectives\n\nA priori vs a posteriori treatment.\nWe say that a decision \\(\\mathbf{x}\\) is dominated if there exists another solution \\(\\mathbf{y}\\) such that for every objective metric \\(Z_i(\\cdot)\\), \\[Z_i(\\mathbf{x}) &gt; Z_i(\\mathbf{y}).\\]\n\\(\\mathbf{x}\\) is non-dominated if it is not dominated by any \\(\\mathbf{y} \\neq \\mathbf{x}\\).\nPareto front: set of non-dominated solutions, each of which involves a tradeoff relative to the others."
   },
   {
+    "objectID": "slides/lecture14-1-simulation-optimization.html#overall-statistics",
+    "href": "slides/lecture14-1-simulation-optimization.html#overall-statistics",
+    "title": "Prelim 2 Review and Simulation-Optimization",
+    "section": "Overall Statistics",
+    "text": "Overall Statistics\n\nMean: 42/50 (84%)\nMedian: 44/50 (88%)\nStandard Deviation: 6.5/50 (13%)"
+  },
+  {
     "objectID": "slides/lecture14-1-simulation-optimization.html#generalized-search-algorithms",
     "href": "slides/lecture14-1-simulation-optimization.html#generalized-search-algorithms",
     "title": "Prelim 2 Review and Simulation-Optimization",
