@@ -29,3 +29,6 @@
 [submodule "solutions/hw01"]
 	path = solutions/hw01
 	url = https://github.com/BEE4750/hw01-solution
+[submodule "hw/hw05"]
+	path = hw/hw05
+	url = https://github.com/BEE4750/hw05
