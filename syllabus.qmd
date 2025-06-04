@@ -48,16 +48,16 @@ This is a 3 credit course which is required for the Environmental Engineering ma
 - {{< fa sharp user title="Name" >}} [[{{< var instructor.name_no_title >}}]({{< var instructor.url >}})]{.ms-1}
 - {{< fa sharp envelope title="Email" >}} [[{{< var instructor.email >}}](mailto:{{< var instructor.email >}})]{.ms-1}
 - {{< fa sharp building title="Office" >}} [{{< var instructor.office >}}]{.ms-2}
-- {{< fa sharp door-open title="Office Hours" >}}[T 10-11am, W 1:30-2:30pm]{.ms-1}
+- {{< fa sharp door-open title="Office Hours" >}}[TTBD]{.ms-1}
 :::
 
 ::: {.column width="30%"}
 ### TA
 
-- {{< fa sharp user title="Name" >}} [Gabriela Ackermann Logan]{.ms-1}
-- {{< fa sharp envelope title="Email" >}} [ga345@cornell.edu]{.ms-1}
-- {{< fa sharp building title="Office" >}} [319 Riley-Robb Hall]{.ms-2}
-- {{< fa sharp door-open title="Office Hours" >}}[M 1:00-2:30pm]{.ms-1}
+- {{< fa sharp user title="Name" >}} [TBD]{.ms-1}
+- {{< fa sharp envelope title="Email" >}} [TBD]{.ms-1}
+- {{< fa sharp building title="Office" >}} [TBD]{.ms-2}
+- {{< fa sharp door-open title="Office Hours" >}}[TBD]{.ms-1}
 ::::
 
 ::: {.column width="30%"}
@@ -91,7 +91,7 @@ At the end of this class, students will:
 2. Use systems models to simulate dynamics and outcomes;
 3. Analyze environmental system risk and vulnerabilities.
 4. Determine strategies for managing systems using optimization;
-5. Identify the  trade-offs  that  result  from  competing  objectives  in  environmental  decision -making; 
+5. Identify the  trade-offs  that  result  from  competing  objectives  in  environmental  decision-making; 
 6. Evaluate modeled outcomes with respect to model assumptions and limits.
 
 ## Prerequisites & Preparation
@@ -327,12 +327,11 @@ Your grade will be computed as the weighted average of the following assessment 
 
 | Category | Weight |
 |:--------|:------:|
-| Participation | 10% |
 | Exercises | 10% |
 | Labs | 10% |
-| Homework | 20% |
+| Homework | 25% |
 | Prelims | 30% |
-| Term Project | 20%
+| Term Project | 25% |
 
 ::: {.callout-note}
 ## Will There Be a Curve?
@@ -361,7 +360,7 @@ Approximately 5 class periods will be dedicated to working through simple exampl
 
 ### Homework Assignments
 
-Approximately 5 homework assignments will be assigned throughout the semester, one per course module (plus an initial homework to build or refresh programming and debugging skills). The homework assignments are more in-depth problem sets involving the modeling (derivation and implementation) and analysis of one or more environmental systems problems.
+Approximately 5-6 homework assignments will be assigned throughout the semester, one per course module (plus an initial homework to build or refresh programming and debugging skills). The homework assignments are more in-depth problem sets involving the modeling (derivation and implementation) and analysis of one or more environmental systems problems.
 
 You will generally have two class weeks to work on an assignment. This is intended to provide you enough time to work on the problem and debug and evaluate your code (including troubleshooting any technical problems); these are not reasons for late submission. Each homework assignment will build on material from the prior classes and possibly from the day the homework is assigned.
 
@@ -379,7 +378,7 @@ Some notes on assignment and grading logistics:
 
 ### Prelims
 
-Two in-class prelims will be given as an opportunity to review relevant material. The dates for the exams are **Wednesday, 10/09** and **Monday, 11/11**. The exams are closed-book and closed-note. As a result, the exams will emphasize conceptual material such as model derivations and interpretation of results; any calculations can be done with a pen(cil) and paper. Conflict and extended-time exams will be handled through SDS. Exams will be scanned into Gradescope for grading and feedback.
+Two in-class prelims will be given as an opportunity to review relevant material. The dates for the exams are **October 15** and **November 19**. The exams are closed-book and closed-note. As a result, the exams will emphasize conceptual material such as model derivations and interpretation of results; any calculations can be done with a pen(cil) and paper. Conflict and extended-time exams will be handled through SDS. Exams will be scanned into Gradescope for grading and feedback.
 
 Solutions will not be posted for the midterms, but Prof. Srikrishnan will review and discuss midterm problems in class. The review will occur approximately two weeks after the exam to provide time for conflict exams and grading.
 
@@ -408,8 +407,7 @@ The following grading scale will be used to convert the numerical weighted avera
 
 | Grade | Range |
 |:---:|:--------|
-| A+ | 97--100 |
-| A | 93--97 |
+| A | 93--100 |
 | A- | 90--93 |
 | B+ | 87--90 |
 | B | 83--87 |
@@ -453,8 +451,8 @@ This should not generally be a concern; students putting in a good faith effort 
 #| echo: false
 #| output: false
 
-start_date = Date(2024, 8, 26)
-end_date = Date(2024, 12, 9)
+start_date = Date(2025, 8, 25)
+end_date = Date(2025, 12, 8)
 
 # set vector of class dates (including holidays)
 cdates = filter(d -> Dates.dayname(d) ∈ ["Monday", "Wednesday"], Date(start_date):Day(1):Date(end_date));
@@ -495,7 +493,7 @@ topics = [
   "Project Work"
 ]
 
-holiday_dates = ["2024-09-02", "2024-10-14", "2024-11-27"];
+holiday_dates = ["2024-09-01", "2024-10-13", "2024-11-26"];
 holidays = DataFrame(Date=Dates.format.(Date.(holiday_dates), "mm-dd"), 
                     Holiday=["Labor Day", "Fall Break", "Thanksgiving Break"]);
 

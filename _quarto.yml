@@ -5,8 +5,8 @@ project:
 
 website:
   page-navigation: true
-  title: "BEE 4750 - Fall 2024"
-  description: "Homepage for BEE 4750/5750, Environmental Systems Analysis, at Cornell University, Fall 2024."
+  title: "BEE 4750 - Fall 2025"
+  description: "Homepage for BEE 4750/5750, Environmental Systems Analysis, at Cornell University, Fall 2025."
   site-url: "https://viveks.me/environmental-systems-analysis"
 
   repo-url: https://github.com/vsrikrish/environmental-systems-analysis
@@ -75,35 +75,8 @@ website:
           - href: rubrics/standard.qmd
             text: "Standard Rubric"
       - section: hw.qmd
-        contents:
-          - href: hw/hw01/hw01.qmd
-            text: "HW 1"
-          - href: hw/hw02/hw02.qmd
-            text: "HW 2"
-          - href: hw/hw03/hw03.qmd
-            text: "HW 3"
-          - href: hw/hw04/hw04.qmd
-            text: "HW 4"
       - section: labs.qmd
-        contents:
-          - href: labs/lab01/lab01.qmd
-            text: "Lab 1"
-          - href: labs/lab02/lab02.qmd
-            text: "Lab 2"
-          - href: labs/lab03/lab03.qmd
-            text: "Lab 3"
       - section: project.qmd
-        contents:
-          - href: project/proposal.qmd
-            text: Proposal
-          - href: project/presentation.qmd
-            text: Presentation
-          - href: project/peer-review.qmd
-            text: Peer Review
-          - href: project/report.qmd
-            text: Report
-          - href: project/evaluations.qmd
-            text: Team Evaluations
       - section: "Tutorials"
         contents:
           - href: tutorials/julia-basics.qmd
@@ -115,7 +88,6 @@ website:
           - href: tutorials/julia-jump.qmd
             text: Solving Linear Programs
       - resources.qmd
-
 
 format:
   html:
