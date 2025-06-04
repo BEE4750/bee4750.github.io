@@ -7,9 +7,9 @@ website:
   page-navigation: true
   title: "BEE 4750 - Fall 2025"
   description: "Homepage for BEE 4750/5750, Environmental Systems Analysis, at Cornell University, Fall 2025."
-  site-url: "https://viveks.me/environmental-systems-analysis"
+  site-url: "https://bee4750.github.io"
 
-  repo-url: https://github.com/vsrikrish/environmental-systems-analysis
+  repo-url: https://github.com/bee4750/bee4750.github.io
   repo-actions: [edit, issue]
 
   open-graph: true
@@ -35,7 +35,7 @@ website:
     search: true
     tools: 
       - icon: github
-        href: https://github.com/vsrikrish/environmental-systems-analysis
+        href: https://github.com/BEE4750/bee4750.github.io
         text: "Github Repository"
       - icon: journal-check
         href: https://canvas.cornell.edu
