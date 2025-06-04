@@ -26,9 +26,6 @@
 	path = labs/lab03
 	url = https://github.com/BEE4750/lab03
 	branch = Fall24
-[submodule "solutions/hw01"]
-	path = solutions/hw01
-	url = https://github.com/BEE4750/hw01-solution
 [submodule "hw/hw05"]
 	path = hw/hw05
 	url = https://github.com/BEE4750/hw05
