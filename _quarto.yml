@@ -7,8 +7,7 @@ website:
   page-navigation: true
   title: "BEE 4750 - Fall 2025"
   description: "Homepage for BEE 4750/5750, Environmental Systems Analysis, at Cornell University, Fall 2025."
-  site-url: "https://bee4750.github.io"
-
+  site-url: "https://bee4750.viveks.me"
   repo-url: https://github.com/bee4750/bee4750.github.io
   repo-actions: [edit, issue]
 
@@ -111,3 +110,5 @@ csl: _assets/references/american-geophysical-union.csl
 engine: julia
 execute: 
   freeze: auto  
+resources:
+  - CNAME
