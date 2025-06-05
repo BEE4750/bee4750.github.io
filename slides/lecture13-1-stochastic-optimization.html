@@ -230,12 +230,10 @@
 </section>
 <section id="general-objective-for-stochastic-lp" class="slide level2">
 <h2>General Objective for Stochastic LP</h2>
-<p><span class="math display">\[
-\min_x \mathbb{E}_\xi \left[f(x; \xi)\right]
-\]</span></p>
+<p><span class="math display">\[\min_x \mathbb{E}_\xi\left\[f(x; \xi)\right]\]</span></p>
 <div class="fragment fade-in">
 <p><strong>Two Stage</strong>:</p>
-<p><span class="math display">\[\min_x f(x) + \mathbb{E}_\xi\left[Q(x; \xi)\right]\]</span></p>
+<p><span class="math display">\[\min_x f(x) + \mathbb{E}_\xi\left[Q(x; \xi)]\right\]</span></p>
 <p>where <span class="math inline">\(Q(x; \xi)\)</span> is the <em>recourse</em> decision made after realizing the uncertainty <span class="math inline">\(\xi\)</span>.</p>
 </div>
 </section>
@@ -259,8 +257,8 @@
 <section id="key-information-for-problem" class="slide level2">
 <h2>Key information For Problem</h2>
 <ul>
-<li>Planting costs are $150, $230, and $260 per ha for wheat, corn, and sugar beets, respectively.</li>
-<li>The farmer requires 200T of wheat and 240T of corn for feed, and excess can be sold for $170 and $150 per T, respectively.</li>
+<li>Planting costs are $150, $230, and $260 per acre for wheat, corn, and sugar beets, respectively.</li>
+<li>The farmer requires 200T of wheat and 240T kg of corn for feed, and excess can be sold for $170 and $150 per T, respectively.</li>
 <li>Purchasing crops costs $40 more than the selling prices.</li>
 <li>Sugar beets are sold at $36/T up to 6000T, at which point the price drops to $10 per T.</li>
 </ul>
@@ -269,10 +267,10 @@
 <h2>Farm Yields</h2>
 <p>From prior experience, the farmer knows that in an average year, yields are:</p>
 <ul>
-<li>2.5 T/ha for wheat;</li>
-<li>3 T/ha per corn;<br>
+<li>2.5 T/acre for wheat;</li>
+<li>3 T/acre per corn;<br>
 </li>
-<li>20 T/ha for beets.</li>
+<li>20T/acre for beets.</li>
 </ul>
 </section>
 <section id="decision-variables" class="slide level2">
@@ -289,7 +287,7 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(x_i\)</span></td>
-<td style="text-align: left;">ha of crop <span class="math inline">\(i\)</span> planted</td>
+<td style="text-align: left;">acres of crop <span class="math inline">\(i\)</span> planted</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(y_i\)</span></td>
@@ -301,8 +299,8 @@
 </tr>
 </tbody>
 </table>
-<p>One twist: sold beets will be represented by two different <span class="math inline">\(z\)</span>-variables (<span class="math inline">\(z_3\)</span> and <span class="math inline">\(z_4\)</span>), based on whether we exceed 6000 T.</p>
 </div>
+<p>One twist: sold beets will be represented by two different <span class="math inline">\(z\)</span>-variables (<span class="math inline">\(z_3\)</span> and <span class="math inline">\(z_4\)</span>), based on whether we exceed 6000T.</p>
 </section>
 <section id="deterministic-problem-formulation" class="slide level2">
 <h2>Deterministic Problem Formulation</h2>
@@ -332,7 +330,7 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Area (ha)</td>
+<td style="text-align: left;">Area (acres)</td>
 <td style="text-align: center;">120</td>
 <td style="text-align: center;">80</td>
 <td style="text-align: center;">300</td>
@@ -384,7 +382,7 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(x_i\)</span></td>
-<td style="text-align: left;">ha of crop <span class="math inline">\(i\)</span> planted</td>
+<td style="text-align: left;">acres of crop <span class="math inline">\(i\)</span> planted</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(y_{ij}\)</span></td>
@@ -467,13 +465,13 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Deterministic Area (ha)</td>
+<td style="text-align: left;">Deterministic Area (acres)</td>
 <td style="text-align: center;">120</td>
 <td style="text-align: center;">80</td>
 <td style="text-align: center;">300</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Stochastic Area (ha)</td>
+<td style="text-align: left;">Stochastic Area (acres)</td>
 <td style="text-align: center;">170</td>
 <td style="text-align: center;">80</td>
 <td style="text-align: center;">250</td>
@@ -481,6 +479,12 @@
 </tbody>
 </table>
 <p>How do we interpret the differences?</p>
+<div class="fragment fade-in">
+<ul>
+<li><strong>Good year</strong>: Won’t waste acreage on extra beets (6000T yield in stochastic solution, 7200T for deterministic)</li>
+<li><strong>Bad year</strong>: Will make less off beets, profits from wheat should help cover extra corn purchase.</li>
+</ul>
+</div>
 </section></section>
 <section>
 <section id="value-of-the-stochastic-solution" class="title-slide slide level1 center">
@@ -559,9 +563,12 @@ VSS &amp;= \mathbb{E}[\text{Stochastic Profit}] - \mathbb{E}[\text{Deterministic
 <h2>Decision-Making and Uncertainty</h2>
 <ul>
 <li>A solution obtained assuming deterministic outcomes might “on paper” yield better anticipated outcomes.</li>
-<li>Common approach is a two-stage optimization framework: initial decision then recourse.</li>
+<li>Common approach is a two-stage optimization framework:
+<ul>
+<li>Make an initial decision;</li>
+<li>Recourse based on which scenario is realized.</li>
+</ul></li>
 <li>Scenario trees help build out the representation of outcomes and probabilities.</li>
-<li>Stochastic solution is often not the best for any given scenario, but outperforms deterministi csolutions in expectation.</li>
 </ul>
 </section>
 <section id="value-of-the-stochastic-solution-2" class="slide level2">
@@ -577,21 +584,21 @@ VSS &amp;= \mathbb{E}[\text{Stochastic Profit}] - \mathbb{E}[\text{Deterministic
 <h1>Upcoming Schedule</h1>
 
 </section>
-<section id="no-class-after-thanksgiving" class="slide level2">
-<h2>No Class after Thanksgiving!</h2>
-<ul>
-<li>Work on project!</li>
-<li>Will have open “office hours” during class time for project check-ins (remotely on 12/4)</li>
-</ul>
-</section>
 <section id="next-classes" class="slide level2">
 <h2>Next Classes</h2>
 <p><strong>Wednesday</strong>: Limits of Mathematical Programming</p>
 <p><strong>Monday</strong>: Prelim 2 Review, Wrap-Up</p>
 </section>
+<section id="no-class-after-thanksgiving" class="slide level2">
+<h2>No Class after Thanksgiving!</h2>
+<ul>
+<li>Work on project!</li>
+<li>Will have open office hours for project check-ins (remotely on 12/4)</li>
+</ul>
+</section>
 <section id="assessments" class="slide level2">
 <h2>Assessments</h2>
-<p><strong>HW5</strong>: Due 12/5.</p>
+<p><strong>HW5</strong>: Will be due last week of class (12/5).</p>
 
 
 </section></section>
@@ -899,7 +906,7 @@ VSS &amp;= \mathbb{E}[\text{Stochastic Profit}] - \mathbb{E}[\text{Deterministic
       }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/viveks\.me\/environmental-systems-analysis");
+          var filterRegex = new RegExp("https:\/\/bee4750\.viveks\.me");
         var isInternal = (href) => {
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
