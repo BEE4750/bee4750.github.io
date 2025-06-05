@@ -1,0 +1,578 @@
+---
+title: "Limits of Mathematical Programming for Systems Analysis"
+subtitle: "Lecture 22"
+author: "Vivek Srikrishnan"
+course: "BEE 4750"
+institution: "Cornell University"
+date: "November 20, 2024"
+format:
+    revealjs:
+        slide-number: c/t
+        show-slide-number: all
+        center-title-slide: true
+        width: 1280
+        height: 720
+        transition: none
+        toc: true
+        toc-depth: 1
+        toc-title: "Overview"
+        history: false
+        link-external-newwindow: true
+        theme: ../sass/slides.scss
+        template-partials:
+            - title-slide.html
+        menu:
+            numbers: true
+        html-math-method: mathjax
+        include-in-header: mathjax-config.html
+        date-format: long
+        email-obfuscation: javascript
+        chalkboard:
+            theme: whiteboard
+            buttons: true
+        auto-stretch: false
+        controls: true
+engine: julia
+execute:
+    freeze: auto
+    daemon: 600
+---
+
+```{julia}
+#| output: false
+import Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+```
+
+```{julia}
+using DataFrames
+using CSV
+using Plots
+using StatsPlots
+using LaTeXStrings
+using Measures
+using Roots
+using Distributions
+
+
+plot_font = "Computer Modern"
+default(
+    fontfamily=plot_font,
+    linewidth=2, 
+    framestyle=:box, 
+    label=nothing, 
+    grid=false,
+    tickfontsize=18,
+    guidefontsize=18,
+    legendfontsize=18,
+    bottom_margin=10mm,
+    left_margin=10mm
+)
+```
+
+# Review and Questions
+
+## Mathematical Programming
+
+- Write decision problem in **closed-form**:
+    - Objectives, constraints as explicit functions of decision variables.
+- Linear Programming:
+    - Linearity
+    - Certainty
+    - Divisibility
+
+## Relaxing LP Assumptions
+
+- Relaxing Divisibility: **Mixed Integer Linear Programming**
+- Relaxing Certainty: **Two-Stage Linear Programs**
+- Relaxing Linearity: not going there
+
+## Treatment of Uncertainty in LPs
+
+- Two-Stage Problems (**Initial Decision -> Recourse**)
+- Scenarios
+
+
+# Thinking More About Mathematical Programming
+
+## Pros and Cons of Mathematical Programming
+
+::: {.fragment .fade-in}
+
+:::: {.columns}
+::: {.column width=50%}
+**Pros**:
+
+- Can guarantee analytic solutions (or close)
+- Often computationally scalable (especially for LPs)
+- Transparent
+
+:::
+
+::: {.column width=50%}
+**Cons**:
+
+- Often quite stylized
+- Limited ability to treat uncertainty
+
+:::
+::::
+:::
+
+## Challenge 1: Writing Down A Mathematical Program
+
+Systems models often have:
+
+1. Hard to write objectives and constraints in closed form;
+2. Nonlinear dynamics with "unpleasant" geometry.
+
+## Recall: Bifurcations
+
+:::: {.columns}
+::: {.column width=35%}
+**Bifurcations** are when the qualitative behavior of a system changes across a parameter boundary.
+:::
+::: {.column width=65%}
+![Bifurcations Diagram](figures/bifurcation.png)
+:::
+::::
+
+## Recall: Feedback Loops
+
+:::: {.columns}
+::: {.column width=55%}
+**Feedback loops** can be *reinforcing* or *dampening*.
+
+Dampening feedback loops are associated with *stable* equilibria, while reinforcing feedback loops are associated with *instability*.
+:::
+::: {.column width=45%}
+![Reinforcing Feedback Example](figures/reinforcing-feedback.png)
+:::
+::::
+
+## What Are The Implications of These Dynamics?
+
+::: {.fragment .fade-in}
+
+- May violate strong geometric constraints from mathematical programming.
+- Neglecting can lead to overconfidence about outcomes.
+
+:::
+
+## Emergence
+
+:::: {.columns}
+::: {.column width=40%}
+
+- Simple "micro"-scale rules can yield more complex and unexpected "macro"-scale outcomes
+- Can complicate writing down system dynamics and constraints in MP form.
+:::
+::: {.column width=60%}
+![Schelling Model Animation](https://upload.wikimedia.org/wikipedia/commons/e/e8/Schellings.gif){width=75%}
+
+::: {.caption}
+Source: Blaqdolphin - Own work, CC BY-SA 4.0, <https://commons.wikimedia.org/w/index.php?curid=91228415>
+:::
+:::
+::::
+
+## Challenge 2: Multiple Objectives
+
+We often have multiple objectives that we want to analyze.
+
+::: {.fragment .fade-in}
+- Costs
+- Environmental impacts
+- Reliability
+:::
+
+## Mathematical Programming and Multiple Objectives
+
+We could formulate constraints based on *a priori* assessments of acceptability:
+    
+- Budget constraints;
+- Reliability constraints 
+
+## Combining Multiple Objectives Together
+
+Another common approach is to combine multiple objectives $Z_i$ together into a weighted sum:
+
+$$\sum_i w_i Z_i,$$
+
+where $\sum_i w_i = 1$.
+
+This requires **normalizing** the $Z_i$.
+
+## Limits of These Approaches
+
+***Can you think of problems or limits with these approaches to handling multiple objectives?***
+
+::: {.fragment .fade-in}
+- Require *a priori* assessments of acceptable limits and/or weights.
+- Limits ability to understand "macro"-scale tradeoffs (beyond shadow prices).
+:::
+
+# Example: Shallow Lake Problem
+
+## Shallow Lake Problem
+
+:::: {.columns}
+::: {.column width=40%}
+Recall the **shallow lake problem** from earlier in the semester.
+
+:::
+::: {.column width=60%}
+
+![Shallow Lake Problem Diagram](figures/eutrophication-system-all.png)
+:::
+::::
+
+## Lake Model
+
+:::: {.columns}
+::: {.column width=45%}
+\begin{align*}
+X_{t+1} &= X_t + a_t + y_t \\
+&\quad + \frac{X_t^q}{1 + X_t^q} - bX_t,\\[0.5em] 
+y_t &\sim \text{LogNormal}(\mu, \sigma^2)
+
+\end{align*}
+:::
+::: {.column width=55%}
+
+| Parameter | Definition |
+|:-----:|:----------|
+| $X_t$ | P concentration in lake | 
+| $a_t$ | point source P input | 
+| $y_t$ | non-point source P input | 
+| $q$ | P recycling rate |
+| $b$ | rate at which P is lost | 
+:::
+::::
+
+## Lake Model Dynamics
+
+```{julia}
+#| layout-ncol: 2
+
+x = 0:0.05:3.0
+fin(x, q) = x.^q ./ (1 .+ x.^q)
+fout(x, b) = b .* x
+f_lake(x, q, b, a) = a + fin(x, q) - fout(x, b)
+
+xfree_1 = find_zero(x -> f_lake(x, 2.5, 0.4, 0.0), 1)
+yfree_1 = fin(xfree_1, 2.5)
+xfree_2 = find_zero(x -> f_lake(x, 2.5, 0.4, 0.0), 2)
+yfree_2 = fin(xfree_2, 2.5)
+
+p1 = plot(x, fin(x, 2.5), color=:black, linewidth=5,legend=:topleft, ylabel="P Flux", xlabel=L"$X_t$", tickfontsize=16, guidefontsize=18, legendfontsize=16, palette=:tol_muted, framestyle=:origin, grid=:false, title="No Exogenous P Inputs", titlefontsize=20, titlefontfamily=:bold, label=L"$\   q=2.5$")
+plot!(x, fout(x, 0.4), linewidth=3, linestyle=:dash, label=L"$\   b=0.4$")
+plot!(size=(600, 600), ylims=(-0.05, 1.1))
+quiver!([1], [0.35], quiver=([1], [0.4]), color=:red, linewidth=2)
+quiver!([0.4], [0.19], quiver=([-0.25], [-0.1]), color=:red, linewidth=2)
+quiver!([2.6], [1.07], quiver=([-0.375], [-0.15]), color=:red, linewidth=2)
+scatter!([0, xfree_1, xfree_2], [0, yfree_1, yfree_2], markersize=10, label="Equilibria", markercolor=:gold)
+display(p1)
+
+xinp_1 = find_zero(x -> f_lake(x, 2.5, 0.4, 0.1), 2)
+yinp_1 = fin(xinp_1, 2.5) + 0.1
+
+p2 = plot(x, 0.10 .+ fin(x, 2.5), color=:black, linewidth=5,legend=:topleft, ylabel="P Flux", xlabel=L"$X_t$", tickfontsize=16, guidefontsize=18, legendfontsize=16, palette=:tol_muted, framestyle=:origin, grid=:false, title="Exogenous P Inputs: 0.10/time", titlefontsize=20, titlefontfamily=:bold, label=L"$\   q=2.5$")
+plot!(x, fout(x, 0.4), linewidth=3, linestyle=:dash, label=L"$\  b=0.4$")
+plot!(size=(600, 600), ylims=(-0.05, 1.1))
+quiver!([0.3], [0.05], quiver=([2], [0.8]), color=:red, linewidth=2)
+quiver!([2.68], [1.1], quiver=([-0.125], [-0.05]), color=:red, linewidth=2)
+scatter!([xinp_1], [yinp_1], markersize=10, label="Equilibria", markercolor=:gold)
+display(p2)
+```
+
+## The Lake Problem As a Mathematical Program?
+
+***What complicates formulating a mathematical program for the lake problem?***
+
+## The Lake Problem As a Mathematical Program?
+
+Our objective might be to maximize $\sum_{t=1}^T a_t$ (as a proxy for economic activity), while keeping a low probability of eutrophication. 
+
+## Uncertain Inputs and MP
+
+***How can we represent uncertainty in inputs $y_t$ in an MP?***
+
+::: {.fragment .fade-in}
+::: {.incremental}
+- Very challenging to formulate scenarios;
+- Non-trivial (if possible) to write expected value in analytic form;
+- But Monte Carlo simulation is straightforward...
+:::
+:::
+
+## Multiple Objectives and the Lake Problem
+
+***What are some relevant objectives for the lake problem?***
+
+::: {.fragment .fade-in}
+- Maximize phosphorous output (proxy for economic output)
+- Maximize probability of avoiding eutrophification
+- Can add other objectives breaking out lake response (stability, worst case P concentration, etc.)
+:::
+
+## Upshot Of These Challenges
+
+Many systems problems with
+
+- complex, non-linear dynamics;
+- continuous uncertainties;
+- multiple objectives.
+
+don't lend themselves well to mathematical programming.
+
+***So how can we make decisions***?
+
+# Multiple Objectives
+
+## Multiple Objectives and Environmental Systems
+
+Often have multiple objectives at play when designing or managing environmental systems:
+
+::: {.fragment .fade-in}
+**Some examples**:
+
+- Cost
+- Environmental quality
+- Reliability/Variability
+:::
+
+## Example: Power Systems
+
+- Total generation cost (including reserves);
+- CO~2~ emissions;
+- Resource adequacy (do we have enough resources available);
+- Reliability;
+- Other environmental impacts
+
+## Example: Reservoir Operations
+
+- Municipal demand;
+- Irrigation;
+- Recreation;
+- Hydropower potential;
+- Flood management;
+- Streamflow (ecosystem management)
+
+## How Can We Incorporate Multiple Objectives Into Models?
+
+Approaches are method specific!
+
+Key Question: ***what does it mean to "optimize" multiple objectives?***
+
+## How Can We Incorporate Multiple Objectives Into Models?
+
+**Linear Programming**:
+
+::: {.fragment .fade-in}
+::: {.incremental}
+
+1. Identify thresholds and establish constraints for non-objective "objectives";
+2. Weight objectives based on preferences, *e.g.*
+    $$\min_\mathbf{x} Z(\mathbf{x}) = \sum_i w_i \hat{Z_i}(\mathbf{x}), \qquad \sum_i w_i =1$$
+
+:::
+:::
+
+## How Can We Incorporate Multiple Objectives Into Models?
+
+**Simulation-Optimization**:
+
+- Could use the LP approaches
+- Can also have the simulation model (or wrapper) return multiple metrics
+
+## Back To The Key Question...
+
+***What does it mean to "optimize" multiple objectives?***
+
+::: {.fragment .fade-in}
+
+Straightforward with weighting, requires but *a priori* elicitation of weights.
+
+What about if we leave the objectives unaggregated?
+
+:::
+
+## Example: Lake Problem
+
+:::: {.columns}
+::: {.column width=50%}
+Simulated 100 random decisions with two objectives:
+
+- Maximize mean P releases
+- Minimize probability of exceeding critical P concentration
+:::
+
+::: {.column width=50%}
+```{julia}
+function lake(a, y, q, b, T)
+    X = zeros(T+1, size(y, 2))
+    # calculate states
+
+    for t = 1:T
+        X[t+1, :] = X[t, :] .+ a[t] .+ y[t, :] .+ (X[t, :].^q./(1 .+ X[t, :].^q)) .- b.*X[t, :]
+    end
+    return X
+end
+
+# set parameters and draw samples
+
+T = 100
+nsamp = 10_000
+lnorm = LogNormal(log(0.03), 0.15)
+y = rand(lnorm, (T, nsamp))
+q = 2.5
+b = 0.4
+a = rand(Uniform(0.0, 0.05), (T, 100))
+
+# find critical value
+crit(x) = (x^q/(1+x^q)) - b*x
+Xcrit = find_zero(crit, (0.1, 1.5))
+
+# write wrapper to evaluate model and return outputs
+function lake_eval(a, y, q, b, T, Xcrit)
+    P = zeros(T+1, size(y, 2))
+    for i = 1:size(y, 2)
+        P[:, i] = lake(a, y[:, i], q, b, T)
+    end
+    return (mean(a), sum(P[101, :]) / size(P, 2))
+end
+
+lake_out = map(x -> lake_eval(x, y, q, b, T, Xcrit), eachslice(a; dims=2))
+obj = DataFrame(mean_a = getindex.(lake_out, 1), worst_P = getindex.(lake_out, 2))
+
+p_pareto = scatter(obj[:, 1], obj[:, 2], markersize=6, label="Candidate Decisions", tickfontsize=16, guidefontsize=18, legendfontsize=14, right_margin=10mm)
+xlabel!("Mean P Release")
+ylabel!("Probability of Eutrophication")
+plot!(size=(600, 600))
+xlims!(0.021, 0.03)
+ylims!(0.10, 0.25)
+```
+:::
+::::
+
+## Tradeoffs
+
+:::: {.columns}
+::: {.column width=50%}
+There is a tradeoff between these two objectives:
+
+Greater releases **typically** means lower reliability.
+
+***What does it mean to find an "optimum" across these two objectives?***
+:::
+
+::: {.column width=50%}
+```{julia}
+annotate!(0.029, 0.17, text("Preferred Direction", color=:purple, pointsize=16, rotation=90))
+annotate!(0.025, 0.11, text("Preferred Direction", color=:purple, pointsize=16))
+quiver!([0.0225], [0.103], quiver=([0.0055], [0]), color=:purple, linewidth=5)
+quiver!([0.0295], [0.215], quiver=([0], [-0.09]), color=:purple, linewidth=5)
+```
+:::
+::::
+
+## Non-Dominated Decisions
+
+:::: {.columns}
+::: {.column width=50%}
+We say that a decision $\mathbf{x}$ is **dominated** if there exists another solution $\mathbf{y}$ such that for every objective metric $Z_i(\cdot)$, $$Z_i(\mathbf{x}) > Z_i(\mathbf{y}).$$
+:::
+
+::: {.column width=50%}
+```{julia}
+sort!(obj, rev=true)
+pareto = obj[1:1, :]
+foreach(row -> row[2] < pareto[end, 2] && push!(pareto, row), eachrow(obj));
+scatter!(p_pareto, pareto[:, 1], pareto[:, 2], label="Non-Dominated Decisions", markersize=6, color=:orange)
+```
+:::
+::::
+
+## Non-Dominated Decisions
+
+:::: {.columns}
+::: {.column width=50%}
+$\mathbf{x}$ is **non-dominated** if it is not dominated by any $\mathbf{y} \neq \mathbf{x}$.
+:::
+
+::: {.column width=50%}
+```{julia}
+p_pareto
+```
+:::
+::::
+
+
+## Pareto Fronts
+
+:::: {.columns}
+::: {.column width=50%}
+The set of non-dominated solutions is called the **Pareto front** (solutions are **Pareto-optimal**).
+
+Every member of a Pareto front represents a different tradeoff between objectives.
+
+:::
+
+::: {.column width=50%}
+```{julia}
+p_pareto
+```
+:::
+::::
+
+## *A Priori* vs *A Posteriori* Decision-Making
+
+This gives us two frameworks for evaluating tradeoffs:
+
+1. ***A Priori***: Establish weights ahead of time and combine objectives;
+2. ***A Posteriori***: Identify Pareto-optimal solutions and then discuss what tradeoffs are tolerable.
+
+## Identifying Pareto Fronts
+
+In higher dimensions, manually screening of a Pareto front is difficult.
+
+Can use **multi-objective optimization** with (certain) evolutionary algorithms.
+
+
+# Key Takeaways
+
+## Takeaways
+
+- General challenges to mathematical programming for general systems analysis. 
+- These challenges include:
+    - Complex and non-linear systems dynamics;
+    - Uncertainties;
+    - Multiple objectives.
+
+## Multiple Objectives
+
+- Management of environmental systems often involves multiple objectives.
+- Multiple objectives often have tradeoffs.
+- Can combine multiple objectives with weights (***a priori*** decision-making) or identifying non-dominated solutions (***a posteriori*** decision-making)
+- Set of non-dominated solutions (**Pareto front**) represent different choices about tradeoffs.
+
+
+
+# Upcoming Schedule
+
+## Next Classes
+
+**Wednesday**: Limits of Mathematical Programming
+
+**Monday**: Prelim 2 Review, Wrap-Up
+
+## No Class after Thanksgiving!
+
+- Work on project!
+- Will have open office hours for project check-ins (remotely on 12/4)
+
+## Assessments
+
+**HW5**: Will be due last week of class (12/5).
