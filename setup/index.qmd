@@ -1,5 +1,5 @@
 ---
-title: "First Time: Tools Setup"
+title: "Tools Setup"
 ---
 
 There are two routes you can take to complete assignments in this class:

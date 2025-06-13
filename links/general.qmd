@@ -1,0 +1,5 @@
+---
+title: "General Resources"
+---
+
+* [UDM14](https://udm14.com/): Google search without AI distortion (or you could use the instructions to make [&udm=14 the default](https://tedium.co/2024/05/17/google-web-search-make-default/)).

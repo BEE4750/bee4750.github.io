@@ -1,16 +1,17 @@
 ---
-title: "BEE 4750: Environmental Systems Analysis"
+title: "Course Schedule"
+page-layout: full
 tbl-colwidths: [5, 10, 25, 5, 5, 5, 5]
 ---
 
 This page contains a schedule of the topics, content, and assignments for the semester.
 Note that this schedule will be updated as necessary the semester progresses, with all changes documented here.
 
-::: column-screen-inset-right
+::: column-screen-inset
 | Week | Date        | Topic | Slides | Lab | HW | 
-:-----:|:------------|:------|:------:|:--:|:---:|:--:|
+:-----:|:------------|:------|:------:|:--:|:---:|
 | | | ***Module 1: Introduction to Systems Analysis*** | | | | |
-| 1    | Mon, Aug 25 | Welcome to BEE 4750! |  | HW1 |  
+| 1    | Mon, Aug 25 | Welcome to BEE 4750! |  | | HW1 |  
 |      | Wed, Aug 27 | Lab: Setting up Julia and GitHub |  | | |
 | 2    | Mon, Sep 01 | **No Class: Labor Day** |  | | | |
 |      | Wed, Sep 03 | Modeling Systems | | | | 

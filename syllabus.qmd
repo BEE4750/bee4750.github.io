@@ -3,6 +3,7 @@ format:
   html:
     toc-depth: 3
     title: Syllabus
+    page-layout: full
   pdf:
     documentclass: article
     geometry:
@@ -20,6 +21,8 @@ format:
     toc-depth: 2
     number-sections: false
 engine: julia
+julia:
+  exeflags: ["+1.11"]
 ---
 
 ```{julia}

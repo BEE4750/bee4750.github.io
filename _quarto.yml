@@ -5,88 +5,162 @@ project:
 
 website:
   page-navigation: true
-  title: "BEE 4750 - Fall 2025"
-  description: "Homepage for BEE 4750/5750, Environmental Systems Analysis, at Cornell University, Fall 2025."
-  site-url: "https://bee4750.viveks.me"
-  repo-url: https://github.com/bee4750/bee4750.github.io
+  title: "Environmental Systems Analysis"
+  description: "Homepage for the Fall 2025 version of BEE 4750/5750, Environmental Systems Analysis, at Cornell University."
+  site-url: "https://envsys.viveks.me/fall2025"
+  repo-url: https://github.com/bee-envsys-cornell/fall2025
   repo-actions: [edit, issue]
+  favicon: _assets/logos/favicon.png
 
   open-graph: true
 
 
   page-footer:
+    left: |
+      <span class="faux-block">{{< fa brands creative-commons >}} {{< var course.copyright_year >}} Vivek Srikrishnan</span><br>
+      See the [About Page](/about.qmd) for credit information.
+    center: 
+      - text: "<a href='https://creativecommons.org/licenses/by-sa/4.0/deed.en'>LICENSE: CC-BY-SA {{< fa creative-commons-sa >}} <i class='fab fa-creative-commons'></i><i class='fab fa-creative-commons-by'></i><i class='fab fa-creative-commons-sa'></i></a>"
     right: |
       Made with [Julia](https://julialang.org) and [Quarto](https://quarto.org/)<br>
       [View the source at {{< fa brands github >}} GitHub]({{< var course.github >}})
 
-    left: |
-      Content {{< fa copyright >}} {{< var course.copyright_year >}}  by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}).
-      See the [About page](/about.html) for credit information.<br>
-      All content licensed under a {{< fa brands creative-commons >}}
-      {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
-      [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
-  sidebar:
-    style: docked
-    align: center
-    logo: _assets/logos/cornell-reduced-red.svg
+  navbar:
+    pinned: true
+    background: "#f7f7f7"
     title: "{{< var course.number >}}"
     search: true
-    tools: 
-      - icon: github
-        href: https://github.com/BEE4750/bee4750.github.io
-        text: "Github Repository"
-      - icon: journal-check
-        href: https://canvas.cornell.edu
-        text: "Canvas"
-      - icon: chat-fill
-        text: "Ed Discussion"
+    left:
+      - text: "Info"
+        menu:
+          - syllabus.qmd
+          - policies/index.qmd
+          - faq/index.qmd
+          - background/index.qmd
+          - setup/index.qmd
+      - schedule.qmd
+      - text: "Content"
+        href: content/index.qmd
+      - text: "Coursework"
+        menu:
+          - labs/index.qmd
+          - hw/index.qmd
+          - prelim/index.html
+          - project/index.qmd
+      - text: "Resources"
+        menu:
+          - tutorials/index.qmd
+          - links/index.qmd
+    right:
+      - href: https://github.com/bee-envsys-cornell/fall2025
+        text: "{{< fa brands github >}} GitHub"
+        aria-label: "GitHub"
+      - href: https://canvas.cornell.edu
+        text: "{{< fa regular notebook >}} Canvas"
+        aria-label: "Canvas"
+      - text: "{{< fa regular comments >}} Ed"
+        aria-label: "Ed Discussion"
         url: https://edstem.org
-      - icon: bar-chart-fill
-        text: "Gradescope"
+      - text: "{{< fa regular chart-simple >}} Gradescope"
         url: https://gradescope.com
-    collapse-level: 1
-    contents:
-      - section: "Course Information"
-        contents:
-          - href: index.qmd
-            text: Overview
-          - href: schedule.qmd
-            text: Schedule
-          - text: Setup
-            href: setup.qmd
-          - text: FAQ
-            href: faq.qmd
-          - href: syllabus.qmd
-            text: Syllabus
-      - section: "Policies"
-        contents:
-          - href: policies/homework.qmd
-            text: "Homework Policies"
-          - href: policies/exam.qmd
-            text: "Exam Policies"
-          - href: policies/grading.qmd
-            text: "Grading Policies"
-          - href: policies/groups.qmd
-            text: "Group Expectations"
-          - href: policies/integrity.qmd
-            text: "Academic Integrity"
-          - href: rubrics/standard.qmd
-            text: "Standard Rubric"
-      - section: hw.qmd
-      - section: labs.qmd
-      - section: project.qmd
-      - section: "Tutorials"
-        contents:
-          - href: tutorials/julia-basics.qmd
-            text: Julia Basics
-          - href: tutorials/julia-plots.qmd
-            text: Making Plots
-          - href: tutorials/latex-notebook.qmd
-            text: Math in Notebooks
-          - href: tutorials/julia-jump.qmd
-            text: Solving Linear Programs
-      - resources.qmd
+        aria-label: "Gradescope"
+
+  sidebar:
+    - title: "Policies"
+      style: docked
+      search: false
+      background: "#f7f7f7"
+      contents:
+        - policies/index.qmd
+        - policies/integrity.qmd
+        - policies/grading.qmd
+        - policies/rubric.qmd
+        - policies/group/qmd
+        - policies/homework.qmd
+        - policies/exam.qmd
+    - title: "Setup"
+      style: docked
+      search: false
+      background: "#f7f7f7"
+      contents:
+        - setup/index.qmd
+        - setup/julia.qmd
+        - setup/git.qmd
+        - setup/vscode.qmd
+    - title: "Course Content"
+      style: docked
+      search: false
+      background: "#f7f7f7"
+      contents:
+        - content/index.qmd
+        - section: "Systems and Models"
+          contents:
+            - content/week01.qmd
+            - content/week02.qmd
+        - section: "Simulation and Risk"
+        - section: "Optimization and Decision-Making"
+    - title: "Labs"
+      style: docked
+      search: false
+      background: "#f7f7f7"
+      contents:
+        - labs/index.qmd
+        - labs/lab01/index.qmd
+        - labs/lab02/index.qmd
+        - labs/lab03/index.qmd
+        - labs/lab04/index.qmd
+    - title: "Homework"
+      style: docked
+      search: false
+      background: "#f7f7f7"
+      contents:
+        - hw/index.qmd
+        - hw/hw01/index.qmd 
+        - hw/hw02/index.qmd 
+        - hw/hw03/index.qmd 
+        - hw/hw04/index.qmd 
+        - hw/hw05/index.qmd 
+        - hw/hw06/index.qmd    
+    - title: "Project"
+      style: docked
+      search: false
+      background: "#f7f7f7"
+      contents:
+        - project/index.qmd
+        - project/proposal.qmd
+        - project/presentation.qmd
+        - project/peer-review.qmd
+        - project/report.qmd
+        - project/team-evals.qmd
+    - title: "Prelims"
+      style: docked
+      search: false
+      background: "#f7f7f7"
+      contents:
+        - prelim/index.qmd
+        - prelim/prelim1.qmd
+        - prelim/prelim2.qmd
+    - title: "Tutorials"
+      style: docked
+      search: false
+      background: "#f7f7f7"
+      contents:
+        - tutorials/index.qmd
+        - tutorials/julia-basics.qmd
+        - tutorials/latex-notebook.qmd
+        - tutorials/julia-plots.qmd
+        - tutorials/julia-jump.qmd
+    - title: "Links"
+      style: docked
+      search: false
+      background: "#f7f7f7"
+      contents:
+        - links/index.qmd
+        - links/general.qmd
+        - links/julia.qmd
+        - links/github.qmd
+        - links/markdown.qmd
+        - links/optimization.qmd
 
 format:
   html:
@@ -108,7 +182,7 @@ bibliography: references.bib
 csl: _assets/references/american-geophysical-union.csl
 
 engine: julia
+julia:
+  exeflags: ["+1.11"]
 execute: 
   freeze: auto  
-resources:
-  - CNAME

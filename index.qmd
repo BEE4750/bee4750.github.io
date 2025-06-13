@@ -1,14 +1,48 @@
 ---
-title: "{{< var course.number >}}: {{< var course.title >}}"
+title: "{{< var course.title >}}"
+details: |
+    This course was developed to teach students to think in systems: how to understand the dynamics resulting from combinations of environmental processes and use mathematical optimization methods to identify management strategies. We emphasize computational modeling for both simulation and optimization and discuss related concepts such as lifecycle assessment and risk quantification. These methods are illustrated using a variety of environmental systems applications.
+subtitle: "BEE 4750/5750<br>Fall 2025<br>Cornell University"  
+sidebar: false
+page-layout: full
+toc: false
+course-logo: _assets/logos/envsys_logo.png
+format:
+    html:
+        template-partials: 
+            - _assets/partials/title-block.html
 ---
 
-This is the course website for the {{< var course.semester >}} edition of {{< var course.number >}}, {{< var course.title >}}, taught at [{{< var university.name >}}]({{< var university.url >}}) by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}).
+::: {.home}
 
-## Course Information
+:::: {.grid .course-details}
 
-- Details on the class and course policies are provided in the [syllabus](syllabus.html).
-- Topics and weekly materials can be found in the [schedule](schedule.html).
-- Make sure you familiarize yourself with the [FAQ](faq.html).
+::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+### Instructor
+
+- {{< fa sharp user title="Name" >}} [[{{< var instructor.name_no_title >}}]({{< var instructor.url >}})]{.ms-1}
+- {{< fa sharp envelope title="Email" >}} [[{{< var instructor.email >}}](mailto:{{< var instructor.email >}})]{.ms-1}
+- {{< fa sharp building title="Office" >}} [{{< var instructor.office >}}]{.ms-2}
+:::
+
+::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+### Course details
+
+- {{< fa sharp calendar title="Class Days" >}} {{< var course.days >}}
+- {{< fa sharp clock title="Class Time" >}} {{< var course.time >}}
+- {{< fa sharp university title="Class Location" >}} {{< var course.location >}}
+:::
+
+::: {.g-col-12 .g-col-md-4 .contact-policy}
+### Contacting me
+
+- {{< fa sharp door-open title="Office Hours" >}}[TBD]{.ms-1}
+- [{{< fa sharp comments title="Ed Discussion" >}}[Ed Discussion]{.ms-1}](https://edstem.org)
+
+:::
+
+::::
+
 
 ## Software Tools
 

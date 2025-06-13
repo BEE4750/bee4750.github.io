@@ -1,0 +1,5 @@
+---
+title: Tutorials
+---
+
+This section contains examples of Julia code or other markup that you can use as a reference throughout the semester. Please feel free to ask questions if you don't understand any of the syntax or why something works the way it does!

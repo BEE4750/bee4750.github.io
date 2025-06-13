@@ -44,3 +44,46 @@ figcaption {
   margin-left: auto;
   margin-right: auto;
 }
+
+// Home page stuff
+.title-block {
+  margin: 0em 0;
+  border-bottom: 3px solid $gray-200;
+  padding-bottom: 1em;
+}
+
+.course-details {
+  margin: 0 0 1em;
+  border-bottom: 3px solid $gray-200;
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+
+.course-details h3 {
+  margin-top: 0;
+}
+
+.course-title {
+  font-size: 3.0rem;
+  margin-top: 0;
+}
+
+.course-subtitle {
+  font-size: 1.5rem;
+}
+
+.course-meta {
+  font-size: 1.2rem;
+  color: $gray-600;
+}
+
+// I copied this from Font Awesome's .fa-ul since there's no way to add a class
+// to a pandoc list
+.course-details ul {
+  list-style-type: none;
+  margin-left: var(--fa-li-margin, 1.5em);  // Was originally 2.5
+  padding-left: 0;
+}
+.course-details ul > li {
+  position: relative;
+}
